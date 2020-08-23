@@ -26,6 +26,10 @@ def PressEnterToContinue():
 
 # Yeni tələbə əlavə etmək
 def InsertStudent():
+    if len(students) == 10:
+        print("10 Nəfərlik sinif dolub!")
+        return
+
     newStudentId = input("Tələbə kodunu əlavə edin:")
 
     # Tələbə kodunun düzgünlüyünün yoxlanılması
