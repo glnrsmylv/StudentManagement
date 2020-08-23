@@ -8,42 +8,48 @@ class Student:
 
 
 students = []
-students.append(Student("123", "tural", "gulnar", "email@email.com", "2123"))
 
-
+# Koda görə tələbənin tapılması
 def FindStudentByStudentId(studentId, students):
     for student in students:
         if student.studentId == studentId:
             return student
-
+# Ada görə tələbə tapılması
 def FindStudentByStudentName(studentName, students):
     for student in students:
         if student.studentName == studentName:
             return student
 
 def PressEnterToContinue():
-    print("Davam etmək üçün enter-i basın")
+    print("Davam etmək üçün 'Enter'-i basın")
     input()
 
+# Yeni tələbə əlavə etmək
 def InsertStudent():
     newStudentId = input("Tələbə kodunu əlavə edin:")
-    # newStudentId validation
-    while 100 > int(newStudentId) or int(newStudentId) > 999:
-        print("Kod 3 reqemli eded olmalidir")
+
+    # Tələbə kodunun düzgünlüyünün yoxlanılması
+    while not newStudentId.isdigit() or 100 > int(newStudentId) or int(newStudentId) > 999:
+        print("Kod 3 rəqəmli ədəd olmalidır")
+        print("-----------------------")
         newStudentId = input("Tələbə kodunu əlavə edin:")
 
     newStudentName = input("Tələbə adını daxil edin:")
-    newStudentSurname = input("Tələbə soyadını daxil edin:")
-    newStudentEmail = input("Tələbə emailini daxil edin:")
+    newStudentSurname = input("Tələbə soyadını daxil edin: ")
+    newStudentEmail = input("Tələbə emailini daxil edin: ")
+
     # newStudentEmail validation
     while "@" not in newStudentEmail:
         print("Email düzgün deyil!")
-        newStudentEmail = input("Tələbə emailini daxil edin:")
+        print("-----------------------")
+        newStudentEmail = input("Tələbə emailini daxil edin: ")
 
     newStudentTel = input("Telefon nömrəsini daxil edin:")
+
     # newStudentTel validation
     while not newStudentTel.startswith("+994"):
         print("Telefon düzgün deyil!")
+        print("-----------------------")
         newStudentTel = input("Telefon nömrəsini daxil edin:")
 
     newStudent = Student(newStudentId, newStudentName, newStudentSurname, newStudentEmail, newStudentTel)
@@ -51,6 +57,7 @@ def InsertStudent():
     print("Tələbə uğurla əlavə olundu!")
     PressEnterToContinue()
 
+# Məlumatların silinməsi
 def DeleteStudent():
     studentId = input("Tələbə kodunu daxil edin:")
     deleteStudent = FindStudentByStudentId(studentId, students)
@@ -61,6 +68,7 @@ def DeleteStudent():
         print("Bele telebe tapilmadi")
     PressEnterToContinue()
 
+# Məlumatların dəyişdirilməsi
 def EditStudent():
     studentId = input("Tələbə kodunu daxil edin:")
     editStudent = FindStudentByStudentId(studentId,students)
@@ -68,25 +76,28 @@ def EditStudent():
         newStudentName = input("Tələbə adını daxil edin:")
         newStudentSurname = input("Tələbə soyadını daxil edin:")
         newStudentEmail = input("Tələbə emailini daxil edin:")
-        # newStudentEmail validation
+
+        # emailin düzgünlüyünün yoxlanılması
         while "@" not in newStudentEmail:
             print("Email düzgün deyil!")
+            print("-----------------------")
             newStudentEmail = input("Tələbə emailini daxil edin:")
 
         newStudentTel = input("Telefon nömrəsini daxil edin:")
         # newStudentTel validation
         while not newStudentTel.startswith("+994"):
             print("Telefon düzgün deyil!")
-            newStudentTel = input("Telefon nömrəsini daxil edin:")
+            print("-----------------------")
+            newStudentTel = input("Telefon nömrəsini daxil edin: ")
 
         editStudent.studentName = newStudentName
         editStudent.studentSurname = newStudentSurname
         editStudent.studentEmail = newStudentEmail
         editStudent.studentTel = newStudentTel
         students[students.index(editStudent)] = editStudent
-        print("Telebe melumatlari ugurla yenilendi")
+        print("Tələbə məlumatları uğurla yeniləndi!")
     else:
-        print("Bele telebe tapilmadi")
+        print("Belə tələbə tapılmadı")
     PressEnterToContinue()
 
 def ShowStudentByName():
@@ -100,7 +111,7 @@ def ShowStudentByName():
         print("Student Phone: " + showStudent.studentTel)
         print("-----------------------")
     else:
-        print("Bele telebe tapilmadi")
+        print("Belə tələbə tapılmadı!")
     PressEnterToContinue()
 
 def ShowAllStudents():
@@ -114,6 +125,7 @@ def ShowAllStudents():
             print("-----------------------")
     else:
         print("Telebe yoxdur")
+
     PressEnterToContinue()
 
 while True:
@@ -125,9 +137,11 @@ while True:
     Bütün tələbələrə baxmaq üçün 5 
     Düyməsinə basın! 
         """)
-    userInput = input()
+    print("-----------------------")
 
-    # New Student
+    userInput = input("Əməliyyatı Seçin: ")
+
+    # Əmrlər
     if userInput == "1":
         InsertStudent()
     elif userInput == "2":
@@ -140,5 +154,6 @@ while True:
         ShowAllStudents()
     else:
         print("Bele bir emeliyyat tapilmadi")
+        print("-----------------------")
 
 
